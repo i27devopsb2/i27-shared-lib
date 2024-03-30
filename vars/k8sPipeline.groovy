@@ -1,6 +1,7 @@
 import com.i27academy.builds.Docker
 import com.i27academy.k8s.K8s
 
+library ('com.i27academy.slb')
 
 def call(Map pipelineParams) {
     Docker docker = new Docker(this)
@@ -309,21 +310,3 @@ def imageValidation() {
 
 
 
-// cp /home/i27k8s10/jenkins/workspace/i27-Eureka_master/target/i27-eureka-0.0.1-SNAPSHOT.jar ./.cicd
-
-// workspace/target/i27-eureka-0.0.1-SNAPSHOT-jar
-
-// i27devopsb2/eureka:tag
-
-
-// Eureka container runs at 8761 port 
-// I will configure env's in a way they will have diff host ports
-// dev ==> 5761 (HP)
-// test ==> 6761 (HP)
-// stage ==> 7761 (HP)
-// Prod ==> 8761 (HP)
-
-
-// stop ==> remove 
-
-// run
