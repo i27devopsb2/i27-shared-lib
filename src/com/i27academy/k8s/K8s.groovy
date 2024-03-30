@@ -13,6 +13,7 @@ class K8s {
         # gcloud auth activate-service-account enkins@nice-carving-411801.iam.gserviceaccount.com --key-file=key.json
         gcloud compute instances list
         echo "************* Listing Number of Nodes in K8S *************"
+        gcloud container clusters get-credentials cart-cluster --zone us-west1-a --project nice-carving-411801
         kubectl get nodes
         """
     }
