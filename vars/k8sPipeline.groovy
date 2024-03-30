@@ -4,7 +4,7 @@ import com.i27academy.k8s.K8s
 library ('com.i27academy.slb')
 
 def call(Map pipelineParams) {
-    //Docker docker = new Docker(this)
+    Docker docker = new Docker(this)
     K8s k8s = new K8s(this)
     pipeline {
         agent {
@@ -302,8 +302,8 @@ def imageValidation() {
         catch (Exception e) {
             println("OOPS!, docker images with this tag is not available")
             println("LINE BEFORE ENTERING DOCKER METHOD")
-            docker.buildApp("${env.APPLICATION_NAME}")
-            dockerBuildandPush().call()
+            //docker.buildApp("${env.APPLICATION_NAME}")
+            //dockerBuildandPush().call()
         }
     }
 }
