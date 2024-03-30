@@ -11,11 +11,11 @@ class Docker {
         // logic
         return firstNumber+secondNumber
     }
-    
+
     // Application Build
     def buildApp() {
         jenkins.sh """#!/bin/bash
-        echo "Building the Eureka Application
+        echo "Building the Shared Library Eureka Application
         sh "mvn clean package -DskipTests=true"
         """
     }

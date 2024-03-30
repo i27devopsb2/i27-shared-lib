@@ -67,6 +67,7 @@ def call(Map pipelineParams) {
                         //buildApp().call()
                         echo "********** Executing Addition Method **********"
                         println docker.add(4,5)
+                        docker.buildApp()
                     }
 
                     //-DskipTests=true 
