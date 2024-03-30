@@ -301,6 +301,7 @@ def imageValidation() {
         }
         catch (Exception e) {
             println("OOPS!, docker images with this tag is not available")
+            println("LINE BEFORE ENTERING DOCKER METHOD")
             docker.buildApp("${env.APPLICATION_NAME}")
             //buildApp().call()
             dockerBuildandPush().call()
