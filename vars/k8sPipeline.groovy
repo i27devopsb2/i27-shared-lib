@@ -49,6 +49,13 @@ def call(Map pipelineParams) {
             DOCKER_CREDS = credentials('i27devopsb2_docker_creds')
             SONAR_URL = "http://34.122.97.102:9000"
             SONAR_TOKEN = credentials('sonar_creds')
+            GKE_DEV_CLUSTER_NAME = "cart-cluster"
+            GKE_DEV_ZONE = "us-west1-a"
+            GKE_DEV_PROJECT = "nice-carving-411801"
+            GKE_TST_CLUSTER_NAME = "tst-cluster"
+            GKE_TST_ZONE = "us-west1-b"
+            GKE_TST_PROJECT = "nice-carving-4118012"   
+            
         }
         tools {
             maven 'Maven-3.8.8'
@@ -59,7 +66,8 @@ def call(Map pipelineParams) {
                 steps {
                     echo "Executing in Google Cloud auth stage"
                     script {
-                        k8s.auth_login()
+                        //gke_cluster_name, gke_zone, gke_project 
+                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
                     }  
                 }
             }
