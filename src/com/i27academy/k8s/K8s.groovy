@@ -21,7 +21,6 @@ class K8s {
         jenkins.sh """#!/bin/bash
         echo "Executing K8S Deploy Method"
         echo "Final Image Tag is $docker_image"
-        # DIT shoudl replace with image been build in the docker build stage
         sed -i "s|DIT|$docker_image|g" ./.cicd/$fileName
         kubectl apply -f ./.cicd/$fileName
         """
