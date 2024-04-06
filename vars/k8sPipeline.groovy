@@ -54,7 +54,7 @@ def call(Map pipelineParams) {
             GKE_TST_CLUSTER_NAME = "tst-cluster"
             GKE_TST_ZONE = "us-west1-b"
             GKE_TST_PROJECT = "nice-carving-4118012"   
-            DOCKER_IMAGE_TAG = sh(script: 'git log -1 --pretty=%h', returnStdout:true)
+            DOCKER_IMAGE_TAG = sh(script: 'git log -1 --pretty=%h', returnStdout:true).trim()
             K8S_DEV_FILE = "k8s_dev.yaml"
         }
         tools {
