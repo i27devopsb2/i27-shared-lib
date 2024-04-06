@@ -50,7 +50,7 @@ def call(Map pipelineParams) {
             SONAR_TOKEN = credentials('sonar_creds')
             GKE_DEV_CLUSTER_NAME = "cart-cluster"
             GKE_DEV_ZONE = "us-west1-a"
-            GKE_DEV_PROJECT = "nice-carving-411801"
+            GKE_DEV_PROJECT = "delta-sprite-416312"
             GKE_TST_CLUSTER_NAME = "tst-cluster"
             GKE_TST_ZONE = "us-west1-b"
             GKE_TST_PROJECT = "nice-carving-4118012"   
