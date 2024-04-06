@@ -9,8 +9,8 @@ class K8s {
     def auth_login(gke_cluster_name, gke_zone, gke_project) {
         jenkins.sh """#!/bin/bash
         echo "Entering Authentication method for GKE Cluster Login"
-        gcloud config set account jenkins@nice-carving-411801.iam.gserviceaccount.com
-        # gcloud auth activate-service-account enkins@nice-carving-411801.iam.gserviceaccount.com --key-file=key.json
+        gcloud config set account jenkins@delta-sprite-416312.iam.gserviceaccount.com
+        # gcloud auth activate-service-account jenkins@nice-carving-411801.iam.gserviceaccount.com --key-file=key.json
         gcloud compute instances list
         echo "************* Listing Number of Nodes in K8S *************"
         gcloud container clusters get-credentials $gke_cluster_name --zone $gke_zone --project $gke_project
