@@ -59,6 +59,8 @@ def call(Map pipelineParams) {
             K8S_TST_FILE = "k8s_tst.yaml"
             K8S_STAGE_FILE = "k8s_stg.yaml"
             K8S_PROD_FILE = "k8s_prd.yaml"
+            DEV_NAMESPACE = "cart-dev-ns"
+            TEST_NAMESPACE = "cart-tst-ns"
         }
         tools {
             maven 'Maven-3.8.8'
@@ -178,7 +180,7 @@ def call(Map pipelineParams) {
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${env.DOCKER_IMAGE_TAG}"
                         // dockerDeploy('dev', '5761' , '8761').call()
                         k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", docker_image)
+                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", docker_image, "${env.DEV_NAMESPACE}")
                         echo "Deployed to Dev Succesfully!!!!"
                     }
                 }
