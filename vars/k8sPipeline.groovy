@@ -54,6 +54,8 @@ def call(Map pipelineParams) {
             GKE_TST_CLUSTER_NAME = "tst-cluster"
             GKE_TST_ZONE = "us-west1-b"
             GKE_TST_PROJECT = "nice-carving-4118012"   
+            DOCKER_IMAGE_TAG = sh(script: 'git log -1 --pretty=%h', returnStdout:true)
+            
             
         }
         tools {
@@ -171,9 +173,10 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
+                        def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${env.DOCKER_IMAGE_TAG}"
                         // dockerDeploy('dev', '5761' , '8761').call()
                         k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy()
+                        k8s.k8sdeploy(docker_image)
                         echo "Deployed to Dev Succesfully!!!!"
                     }
                 }
