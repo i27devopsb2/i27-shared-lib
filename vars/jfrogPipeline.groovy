@@ -328,6 +328,7 @@ def imageValidation() {
     return {
         println ("Pulling the docker image")
         try {
+        sh "docker login -u ${JFROG_CREDS_USR} -p ${JFROG_CREDS_PSW}"
         sh "docker pull ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${env.DOCKER_IMAGE_TAG}" 
         }
         catch (Exception e) {
