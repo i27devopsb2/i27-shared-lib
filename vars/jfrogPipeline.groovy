@@ -280,7 +280,7 @@ def dockerBuildandPush(){
             sh "ls -la ./.cicd"
             sh "docker build --force-rm --no-cache --pull --rm=true --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${env.DOCKER_IMAGE_TAG} ./.cicd"
             echo "******************************** Login to JFROG Docker Repo ********************************"
-            sh "docker login -u ${JFROG_CREDS_USR} -p ${JFROG_CREDS_PSW}"
+            sh "docker login -u ${JFROG_CREDS_USR} -p ${JFROG_CREDS_PSW} flipcart.jfrog.io"
             echo "******************************** Docker Push ********************************"
             sh "docker push ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${env.DOCKER_IMAGE_TAG}"
             echo "Pushed the image succesfully!!!"
@@ -328,7 +328,7 @@ def imageValidation() {
     return {
         println ("Pulling the docker image")
         try {
-        sh "docker login -u ${JFROG_CREDS_USR} -p ${JFROG_CREDS_PSW}"
+        sh "docker login -u ${JFROG_CREDS_USR} -p ${JFROG_CREDS_PSW} flipcart.jfrog.io"
         sh "docker pull ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${env.DOCKER_IMAGE_TAG}" 
         }
         catch (Exception e) {
