@@ -61,6 +61,9 @@ def call(Map pipelineParams) {
             K8S_PROD_FILE = "k8s_prd.yaml"
             DEV_NAMESPACE = "cart-dev-ns"
             TEST_NAMESPACE = "cart-tst-ns"
+            DEV_ENV = "dev"
+            TST_ENV = "tst"
+            HELM_PATH = "${WORKSPACE}/i27-shared-lib/chart"
         }
         tools {
             maven 'Maven-3.8.8'
@@ -191,7 +194,7 @@ def call(Map pipelineParams) {
                         // dockerDeploy('dev', '5761' , '8761').call()
                         //k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
                        // k8s.k8sdeploy("${env.K8S_DEV_FILE}", docker_image, "${env.DEV_NAMESPACE}")
-                        //k8sHelmChartDeploy()
+                        k8sHelmChartDeploy("${env.APPLICATION_NAME}", "${env.DEV_ENV}", "${env.HELM_PATH}")
                         echo "Deployed to Dev Succesfully!!!!"
                     }
                 }
