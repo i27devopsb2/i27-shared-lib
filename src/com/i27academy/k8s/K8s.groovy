@@ -25,5 +25,13 @@ class K8s {
         kubectl apply -f ./.cicd/$fileName -n $namespace
         """
     }
+
+    def k8sHelmChartDeploy() {
+       jenkins.sh """#!/bin/bash
+       echo "*************** Helm Groovy method Starts here ***************"
+
+       # helm install chartname -f valuesfiulepath
+       """ 
+    }
     
 }
