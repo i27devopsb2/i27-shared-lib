@@ -33,5 +33,18 @@ class K8s {
        # helm install chartname -f valuesfiulepath
        """ 
     }
+
+    def gitClone() {
+       jenkins.sh """#!/bin/bash
+       echo "*************** Entering Git Clone Method ***************"
+       git clone -b master https://github.com/i27devopsb2/i27-shared-lib.git
+       echo "Listing the files"
+       ls -la 
+       echo "Showing the files under i27-shared-lib repo"
+       ls -la i27-shared-lib
+       echo "Showing the files under chart folder"
+       ls -la i27-shared-lib/chart/
+       """ 
+    }
     
 }
