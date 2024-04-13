@@ -10,6 +10,8 @@ def call(Map pipelineParams) {
         agent any
         parameters {
             string (name: 'NAMESPACE_NAME', description: 'Enter the name of the k8s namespace to be created')
+            string (name: 'ADD_PVC' , description: "Enter the PVC size u want to have in your namespace")
+            string (name: 'netpolName', description: "Enter the Name for the netpol")
         }
         environment {
             APPLICATION_NAME = "${pipelineParams.appName}"
@@ -24,20 +26,9 @@ def call(Map pipelineParams) {
             GKE_DEV_PROJECT = "delta-sprite-416312"
             GKE_TST_CLUSTER_NAME = "tst-cluster"
             GKE_TST_ZONE = "us-west1-b"
-            GKE_TST_PROJECT = "nice-carving-4118012"   
-            DOCKER_IMAGE_TAG = sh(script: 'git log -1 --pretty=%h', returnStdout:true).trim()
-            K8S_DEV_FILE = "k8s_dev.yaml"
-            K8S_TST_FILE = "k8s_tst.yaml"
-            K8S_STAGE_FILE = "k8s_stg.yaml"
-            K8S_PROD_FILE = "k8s_prd.yaml"
-            DEV_NAMESPACE = "cart-dev-ns"
-            TEST_NAMESPACE = "cart-tst-ns"
-            DEV_ENV = "dev"
-            TST_ENV = "tst"
-            HELM_PATH = "${WORKSPACE}/i27-shared-lib/chart"
-            JFROG_DOCKER_REGISTRY = "flipcart.jfrog.io"
-            JFROG_DOCKER_REPO_NAME = "images-docker"
-            JFROG_CREDS = credentials('JFROG_CREDS')
+            NETPOL_PATH = "./i27-shared-lib/src/com/i27academy/k8s/default/netpol-generic.yaml"
+            NETPOL_NAME = "${params.netpolName}"
+
         }
         stages {
             stage ('Checkout') {
@@ -61,6 +52,15 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         k8s.namespace_creation("${params.NAMESPACE_NAME}")
+                    }
+                }
+            }
+            stage ('Manifest Opration') {
+                steps {
+                    script {
+                        println("Starting The Manifest Operation stage")
+                        k8s.netpolReplace(env.NETPOL_PATH, "${params.NAMESPACE_NAME}","${params.NAMESPACE_NAME}"+'-'+env.NETPOL_NAME)
+                        // mysql network policy
                     }
                 }
             }
