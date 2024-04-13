@@ -53,6 +53,8 @@ class K8s {
        ls -la i27-shared-lib
        echo "Showing the files under chart folder"
        ls -la i27-shared-lib/chart/
+       echo "Showing the link in default folder"
+       ls -la i27-shared-lib/src/com/i27academy/k8s/default/
        """ 
     }
 
