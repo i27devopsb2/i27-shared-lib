@@ -94,7 +94,7 @@ class K8s {
         jenkins.sh """#!/bin/bash
         echo "This is from Netpol groovy method"
         fname=${filename}
-        echo ${fname}
+        echo \${fname}
         sed -i 's/network-allow/${replace_netpol_name}/' \${fname}
         kubectl apply -f \${fname} -n ${namespace}
         echo "Network policy created succesfully"
