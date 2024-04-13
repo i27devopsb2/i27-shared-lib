@@ -64,6 +64,13 @@ class K8s {
         
         #namespace_name="boutique"
         echo "Namespace given is ${namespace_name}"
+         
+        # Validate If the namespace is Empty
+
+        if [ -z "${namespace_name} "]; then
+          echo "Error: Namespace Cant be Empty"
+          exit 1
+        fi
         # Lets Verify if Kubernetes namespace exists 
         if kubectl get namespace "${namespace_name}" &> /dev/null ; then 
         echo "Your kubernetes namesapce '${namespace_name}' exists"
