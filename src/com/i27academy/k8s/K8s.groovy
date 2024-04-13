@@ -67,7 +67,7 @@ class K8s {
          
         # Validate If the namespace is Empty
 
-        if [ -z "${namespace_name} "]; then
+        if [ -z "${namespace_name}" ]; then
           echo "Error: Namespace Cant be Empty"
           exit 1
         fi
