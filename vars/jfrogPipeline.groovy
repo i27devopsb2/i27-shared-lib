@@ -66,7 +66,7 @@ def call(Map pipelineParams) {
             HELM_PATH = "${WORKSPACE}/i27-shared-lib/chart"
             JFROG_DOCKER_REGISTRY = "flipcart.jfrog.io"
             JFROG_DOCKER_REPO_NAME = "images-docker"
-            JFROG_CREDS = credentials('JFROG_CREDS')
+            JFROG_CREDS = credentials('JFROG_CREDS') // tokens
         }
         tools {
             maven 'Maven-3.8.8'
